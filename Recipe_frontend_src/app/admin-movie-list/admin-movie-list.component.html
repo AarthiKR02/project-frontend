@@ -1,0 +1,49 @@
+<div class="page">
+
+  <!-- Grid of cards -->
+  <div class="grid" *ngIf="!loading && !error">
+    <div class="card" *ngFor="let m of movies">
+      <div class="card-body text-center">
+        <!-- Title -->
+        <h3 class="title">{{ m.name }}</h3>
+
+        <!-- Theatre -->
+        <div class="subtle">{{ m.theatreName }}</div>
+
+        <!-- Stats -->
+        <!-- <div class="stat">
+          <span>Booked Tickets: <strong>{{ m.bookedTickets ?? 0 }}</strong></span>
+        </div> -->
+
+        <div class="stat">
+          <span>Booked Tickets: <strong>{{ m.numberOfTickets ?? (m.tickets?.length ?? 0) }}</strong></span>
+        </div>
+
+        <div class="stat">
+          <span>Available: <strong>{{ m.totalTickets }}</strong></span>
+        </div>
+
+        <div class="stat">
+          <span class="label">Status:</span>
+          <span class="status">{{ m.status }}</span>
+        </div>
+
+        <!-- Primary full-width action -->
+        <!-- Pass canonical token 'ASAP' that the component maps to backend value -->
+        <button class="btn btn-teal full-width" (click)="updateStatus(m, 'ASAP')">
+          Mark Book ASAP
+        </button>
+
+        <!-- Secondary actions (red) -->
+        <div class="actions-inline">
+          <!-- Pass canonical token 'SOLD_OUT' that the component maps to backend value -->
+          <button class="btn btn-danger" (click)="updateStatus(m, 'SOLD_OUT')">Mark Sold Out</button>
+          <button class="btn btn-danger" (click)="refreshAvailability(m)">Refresh Availability</button>
+        </div> 
+
+        <!-- Tertiary action (small gray pill) -->
+        <button class="btn btn-muted btn-pill" (click)="deleteMovie(m)">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
